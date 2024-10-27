@@ -6,7 +6,7 @@
 #include <slist.h>
 
 slist *
-slist_new()
+slist_new(void)
 {
 	slist *list = malloc(sizeof(*list));
 	if (!list)

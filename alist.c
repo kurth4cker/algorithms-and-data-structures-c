@@ -8,7 +8,7 @@
 const size_t DEFAULT_CAPACITY = 16;
 
 alist *
-alist_new()
+alist_new(void)
 {
 	alist *arr = malloc(sizeof(*arr));
 	if (!arr)
