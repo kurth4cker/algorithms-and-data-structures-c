@@ -11,7 +11,8 @@ OBJECTS = \
 	aqueue.o \
 	lstack.o \
 	lqueue.o \
-	slist.o
+	slist.o \
+	qdeque.o
 HEADERS = $(OBJECTS:.o=.h)
 
 all: $(BINARIES)
@@ -23,6 +24,7 @@ lstack.o: lstack.h slist.h
 lqueue.o: lqueue.h slist.h
 main.o: $(HEADERS)
 slist.o: slist.h
+qdeque.o: qdeque.h
 
 main: main.o $(OBJECTS)
 	$(CC) $(LDFLAGS) -o $@ $< $(OBJECTS) $(LDLIBS)

@@ -4,32 +4,38 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <lstack.h>
+#include <qdeque.h>
+
+void
+print_qdeque(const qdeque *dq)
+{
+	printf("capacity = %zu, size = %zu\n", dq->capacity, dq->size);
+	printf("head = %zu, tail = %zu\n", dq->head, dq->tail);
+	for (size_t i = 0; i < qdeque_size(dq); i++) {
+		int val;
+		qdeque_get(dq, i, &val);
+		printf("deque[%zu] = %d\n", i, val);
+	}
+}
 
 int
 main(void)
 {
-	lstack *st = lstack_new();
-	if (!st) {
-		fprintf(stderr, "lstack_new failed\n");
+	qdeque *dq = qdeque_new_with_capacity(2);
+	if (!dq) {
+		fprintf(stderr, "deque_new failed\n");
 		exit(EXIT_FAILURE);
 	}
 
-	for (int i = 0; i < 1000; i++) {
-		lstack_push(st, &i);
-	}
+	for (int i = 0; i < 8; i++)
+		qdeque_add_tail(dq, &i);
 
-	lstack_clear(st);
+	for (int i = 10; i < 90; i += 10)
+		qdeque_add_head(dq, &i);
 
-	for (int i = 0; i < 128; i++) {
-		lstack_push(st, &i);
-	}
+	qdeque_add_tail(dq, &(int){ 32 });
 
-	while (st->count) {
-		int val;
-		lstack_pop(st, &val);
-		printf("%d\n", val);
-	}
+	print_qdeque(dq);
 
-	lstack_free(st);
+	qdeque_free(dq);
 }
