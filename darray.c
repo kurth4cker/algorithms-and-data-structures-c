@@ -3,14 +3,14 @@
 
 #include <stdlib.h>
 
-#include <alist.h>
+#include <darray.h>
 
 const size_t DEFAULT_CAPACITY = 16;
 
-alist *
-alist_new(void)
+darray *
+darray_new(void)
 {
-	alist *arr = malloc(sizeof(*arr));
+	darray *arr = malloc(sizeof(*arr));
 	if (!arr)
 		return NULL;
 	arr->data = malloc(sizeof(*arr->data) * DEFAULT_CAPACITY);
@@ -24,7 +24,7 @@ alist_new(void)
 }
 
 void
-alist_free(alist *arr)
+darray_free(darray *arr)
 {
 	free(arr->data);
 	free(arr);
