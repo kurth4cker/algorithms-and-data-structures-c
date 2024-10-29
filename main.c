@@ -4,38 +4,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <astack.h>
+#include <lstack.h>
 
 int
 main(void)
 {
-	astack *st = astack_new_with_size(32);
+	lstack *st = lstack_new();
 	if (!st) {
-		fprintf(stderr, "astack_new failed\n");
+		fprintf(stderr, "lstack_new failed\n");
 		exit(EXIT_FAILURE);
 	}
 
 	for (int i = 0; i < 1000; i++) {
-		astack_push(st, &i);
+		lstack_push(st, &i);
 	}
 
-	astack_clear(st);
+	lstack_clear(st);
 
 	for (int i = 0; i < 128; i++) {
-		astack_push(st, &i);
-	}
-
-	astack_clear(st);
-
-	for (int i = 0; !astack_full(st); i++) {
-		astack_push(st, &i);
+		lstack_push(st, &i);
 	}
 
 	while (st->count) {
 		int val;
-		astack_pop(st, &val);
+		lstack_pop(st, &val);
 		printf("%d\n", val);
 	}
 
-	astack_free(st);
+	lstack_free(st);
 }

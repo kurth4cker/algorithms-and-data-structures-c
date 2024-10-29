@@ -5,7 +5,13 @@ CFLAGS = -g -pedantic -Wall -Werror
 COMMON_CFLAGS = -std=c99 -I. $(CFLAGS)
 
 BINARIES = main
-OBJECTS = alist.o aqueue.o lqueue.o slist.o astack.o
+OBJECTS = \
+	alist.o \
+	astack.o \
+	aqueue.o \
+	lstack.o \
+	lqueue.o \
+	slist.o
 HEADERS = $(OBJECTS:.o=.h)
 
 all: $(BINARIES)
@@ -13,6 +19,7 @@ all: $(BINARIES)
 alist.o: alist.h
 astack.o: astack.h
 aqueue.o: aqueue.h
+lstack.o: lstack.h slist.h
 lqueue.o: lqueue.h slist.h
 main.o: $(HEADERS)
 slist.o: slist.h
