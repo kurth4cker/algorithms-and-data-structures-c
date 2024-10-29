@@ -4,38 +4,40 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <qdeque.h>
+#include <farray.h>
+
+static int
+pow_int(int base, int exp)
+{
+	int val = 1;
+	while (exp--) {
+		val *= base;
+	}
+	return val;
+}
 
 void
-print_qdeque(const qdeque *dq)
+print_farray(const farray *arr)
 {
-	printf("capacity = %zu, size = %zu\n", dq->capacity, dq->size);
-	printf("head = %zu, tail = %zu\n", dq->head, dq->tail);
-	for (size_t i = 0; i < qdeque_size(dq); i++) {
-		int val;
-		qdeque_get(dq, i, &val);
-		printf("deque[%zu] = %d\n", i, val);
+	printf("size = %zu\n", farray_size(arr));
+	for (size_t i = 0; i < farray_size(arr); i++) {
+		printf("arr[%zu] = %d\n", i, farray_get(arr, i));
 	}
 }
 
 int
 main(void)
 {
-	qdeque *dq = qdeque_new_with_capacity(2);
-	if (!dq) {
-		fprintf(stderr, "deque_new failed\n");
+	farray *arr = farray_new(16);
+	if (!arr) {
+		fprintf(stderr, "farray_new failed\n");
 		exit(EXIT_FAILURE);
 	}
 
-	for (int i = 0; i < 8; i++)
-		qdeque_add_tail(dq, &i);
+	for (int i = 0; i < farray_size(arr); i++) {
+		farray_set(arr, i, pow_int(2, i));
+	}
 
-	for (int i = 10; i < 90; i += 10)
-		qdeque_add_head(dq, &i);
-
-	qdeque_add_tail(dq, &(int){ 32 });
-
-	print_qdeque(dq);
-
-	qdeque_free(dq);
+	print_farray(arr);
+	farray_free(arr);
 }

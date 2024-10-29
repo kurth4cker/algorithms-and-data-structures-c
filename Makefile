@@ -7,6 +7,7 @@ COMMON_CFLAGS = -std=c99 -I. $(CFLAGS)
 BINARIES = main
 OBJECTS = \
 	alist.o \
+	array.o \
 	astack.o \
 	aqueue.o \
 	lstack.o \
@@ -18,6 +19,7 @@ HEADERS = $(OBJECTS:.o=.h)
 all: $(BINARIES)
 
 alist.o: alist.h
+array.o: array.h
 astack.o: astack.h
 aqueue.o: aqueue.h
 lstack.o: lstack.h slist.h
