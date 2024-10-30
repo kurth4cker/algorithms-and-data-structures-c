@@ -13,6 +13,7 @@ OBJECTS = \
 	lstack.o \
 	lqueue.o \
 	slist.o \
+	snode.o \
 	qdeque.o
 HEADERS = $(OBJECTS:.o=.h)
 
@@ -25,7 +26,8 @@ farray.o: farray.h
 lstack.o: lstack.h slist.h
 lqueue.o: lqueue.h slist.h
 main.o: $(HEADERS)
-slist.o: slist.h
+slist.o: slist.h snode.h
+snode.o: snode.h
 qdeque.o: qdeque.h
 
 main: main.o $(OBJECTS)

@@ -1,11 +1,7 @@
 #pragma once
 
 #include <stddef.h>
-
-typedef struct snode {
-	int data;
-	struct snode *next;
-} snode;
+#include <snode.h>
 
 typedef struct slist {
 	snode *head;
@@ -20,6 +16,3 @@ snode *slist_del_head(slist *);
 
 snode *slist_get(const slist *, size_t);
 snode *slist_tail(const slist *);
-
-snode *snode_add_next(snode *, int);
-snode *snode_del_next(snode *);

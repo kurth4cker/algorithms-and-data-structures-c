@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 #include <slist.h>
+#include <snode.h>
 
 slist *
 slist_new(void)
@@ -75,30 +76,4 @@ slist_tail(const slist *list)
 		cur = cur->next;
 
 	return cur;
-}
-
-snode *
-snode_add_next(snode *node, int val)
-{
-	snode *new = malloc(sizeof(*new));
-	if (!new)
-		return NULL;
-
-	new->data = val;
-	new->next = node->next;
-	node->next = new;
-
-	return new;
-}
-
-snode *
-snode_del_next(snode *node)
-{
-	if (node->next) {
-		snode *delnode = node->next;
-		node->next = delnode->next;
-		free(delnode);
-	}
-
-	return node->next;
 }
