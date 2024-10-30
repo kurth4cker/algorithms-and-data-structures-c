@@ -12,7 +12,6 @@ OBJECTS = \
 	farray.o \
 	lstack.o \
 	lqueue.o \
-	person.o \
 	slist.o \
 	sl_hashtable.o \
 	snode.o \
@@ -29,7 +28,6 @@ farray.o: farray.h
 lstack.o: lstack.h slist.h
 lqueue.o: lqueue.h slist.h
 main.o: $(HEADERS)
-person.o: person.h
 slist.o: slist.h snode.h
 sl_hashtable.o: sl_hashtable.h snode.h
 snode.o: snode.h

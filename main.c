@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 
 #include <tree.h>
@@ -54,7 +55,6 @@ main(void)
 		exit(EXIT_FAILURE);
 	}
 
-	person people[8];
 	const char *names[8] = {
 		"ali",
 		"ayşe",
@@ -65,10 +65,13 @@ main(void)
 		"erlik",
 		"ülgen",
 	};
-	for (size_t i = 0; i < sizeof(people) / sizeof(*people); i++) {
+	for (size_t i = 0; i < sizeof(names) / sizeof(*names); i++) {
 		size_t id = (size_t)abs(rand()) % 256;
-		person_init_with_id(people + i, names[i], id);
-		binary_tree_insert(bt, people + i);
+		person pn = {
+			.id = id,
+		};
+		strncpy(pn.name, names[i], sizeof(pn.name) / sizeof(*pn.name));
+		binary_tree_insert(bt, &pn);
 	}
 
 	print_binary_tree(bt);
