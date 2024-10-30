@@ -3,7 +3,7 @@
 
 #include <stdlib.h>
 
-#include <farray.h>
+#include <array.h>
 
 farray *
 farray_new(size_t size)
