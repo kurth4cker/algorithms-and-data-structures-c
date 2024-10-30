@@ -14,43 +14,43 @@ print_person(const person *pn)
 }
 
 static void
-print_bintnode(const bintnode *node)
+print_binary_node(const binary_node *node)
 {
 	if (node->left)
-		print_bintnode(node->left);
+		print_binary_node(node->left);
 	print_person(&node->person);
 	if (node->right)
-		print_bintnode(node->right);
+		print_binary_node(node->right);
 }
 
 static void
-print_bintnode_with_depth(const bintnode *node, size_t depth)
+print_binary_node_with_depth(const binary_node *node, size_t depth)
 {
 	for (size_t i = 0; i < depth; i++)
 		printf("-");
 	printf(">");
 	print_person(&node->person);
 	if (node->left)
-		print_bintnode_with_depth(node->left, depth + 1);
+		print_binary_node_with_depth(node->left, depth + 1);
 	if (node->right)
-		print_bintnode_with_depth(node->right, depth + 1);
+		print_binary_node_with_depth(node->right, depth + 1);
 }
 
 void
-print_bintree(const bintree *bt)
+print_binary_tree(const binary_tree *bt)
 {
 	printf("size = %zu, root = %p\n", bt->size, (void *)bt->root);
-	print_bintnode_with_depth(bt->root, 0);
-	print_bintnode(bt->root);
+	print_binary_node_with_depth(bt->root, 0);
+	print_binary_node(bt->root);
 }
 
 int
 main(void)
 {
 	srand(time(NULL));
-	bintree *bt = bintree_new();
+	binary_tree *bt = binary_tree_new();
 	if (!bt) {
-		fprintf(stderr, "bintree_new failed\n");
+		fprintf(stderr, "binary_tree_new failed\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -68,9 +68,9 @@ main(void)
 	for (size_t i = 0; i < sizeof(people) / sizeof(*people); i++) {
 		size_t id = (size_t)abs(rand()) % 256;
 		person_init_with_id(people + i, names[i], id);
-		bintree_insert(bt, people + i);
+		binary_tree_insert(bt, people + i);
 	}
 
-	print_bintree(bt);
-	bintree_free(bt);
+	print_binary_tree(bt);
+	binary_tree_free(bt);
 }

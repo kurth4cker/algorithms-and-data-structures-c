@@ -5,19 +5,19 @@
 #include <tree.h>
 
 void
-bintnode_free(bintnode *node)
+binary_node_free(binary_node *node)
 {
 	if (node->right)
-		bintnode_free(node->right);
+		binary_node_free(node->right);
 	if (node->left)
-		bintnode_free(node->left);
+		binary_node_free(node->left);
 	free(node);
 }
 
-bintree *
-bintree_new(void)
+binary_tree *
+binary_tree_new(void)
 {
-	bintree *bt = malloc(sizeof(*bt));
+	binary_tree *bt = malloc(sizeof(*bt));
 	if (!bt)
 		return NULL;
 
@@ -28,17 +28,17 @@ bintree_new(void)
 }
 
 void
-bintree_free(bintree *bt)
+binary_tree_free(binary_tree *bt)
 {
-	bintnode_free(bt->root);
+	binary_node_free(bt->root);
 	free(bt);
 }
 
 bool
-bintree_insert(bintree *bt, const person *pn)
+binary_tree_insert(binary_tree *bt, const person *pn)
 {
-	bintnode *node = bt->root;
-	bintnode *parent;
+	binary_node *node = bt->root;
+	binary_node *parent;
 	while (node) {
 		parent = node;
 		if (pn->id < node->person.id)
@@ -51,7 +51,7 @@ bintree_insert(bintree *bt, const person *pn)
 		}
 	}
 
-	bintnode *new = malloc(sizeof(*new));
+	binary_node *new = malloc(sizeof(*new));
 	if (!new)
 		return false;
 	new->left = new->right = NULL;
@@ -73,9 +73,9 @@ success:
 }
 
 person *
-bintree_find(const bintree *bt, size_t key)
+binary_tree_find(const binary_tree *bt, size_t key)
 {
-	bintnode *node = bt->root;
+	binary_node *node = bt->root;
 	while (node) {
 		if (key < node->person.id)
 			node = node->left;

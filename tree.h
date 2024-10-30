@@ -2,21 +2,20 @@
 
 #include <person.h>
 
-typedef struct bintnode {
-	struct bintnode *left, *right;
+typedef struct binary_node {
+	struct binary_node *left, *right;
 	person person;
-} bintnode;
+} binary_node;
 
-void bintnode_free(bintnode *);
+void binary_node_free(binary_node *);
 
-typedef struct bintree {
-	bintnode *root;
+typedef struct binary_tree {
+	binary_node *root;
 	size_t size;
-} bintree;
+} binary_tree;
 
-bintree *bintree_new(void);
-void bintree_free(bintree *);
+binary_tree *binary_tree_new(void);
+void binary_tree_free(binary_tree *);
 
-bool bintree_insert(bintree *, const person *);
-
-person *bintree_find(const bintree *, size_t id);
+bool binary_tree_insert(binary_tree *, const person *);
+person *binary_tree_find(const binary_tree *, size_t id);
