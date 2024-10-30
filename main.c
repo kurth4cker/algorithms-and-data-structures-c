@@ -4,40 +4,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <farray.h>
-
-static int
-pow_int(int base, int exp)
-{
-	int val = 1;
-	while (exp--) {
-		val *= base;
-	}
-	return val;
-}
+#include <sl_hashtable.h>
 
 void
-print_farray(const farray *arr)
+print_sl_hashtable(const sl_hashtable *ht)
 {
-	printf("size = %zu\n", farray_size(arr));
-	for (size_t i = 0; i < farray_size(arr); i++) {
-		printf("arr[%zu] = %d\n", i, farray_get(arr, i));
+	printf("size = %zu, tablesize = %zu\n", ht->size, ht->tablesize);
+	for (int i = 0;; i++) {
+		const int *val = sl_hashtable_find(ht, i);
+		if (!val)
+			break;
+		printf("hashtable[%d] = %d at %p\n", i, *val, (void *)val);
 	}
 }
 
 int
 main(void)
 {
-	farray *arr = farray_new(16);
-	if (!arr) {
-		fprintf(stderr, "farray_new failed\n");
+	sl_hashtable *ht = sl_hashtable_new_with_tablesize(8);
+	if (!ht) {
+		fprintf(stderr, "sl_hashtable_new failed\n");
 		exit(EXIT_FAILURE);
 	}
 
-	for (int i = 0; i < farray_size(arr); i++) {
-		farray_set(arr, i, pow_int(2, i));
+	for (int i = 0; i < 32; i++) {
+		sl_hashtable_insert(ht, &i);
 	}
 
-	print_farray(arr);
-	farray_free(arr);
+	print_sl_hashtable(ht);
 }
