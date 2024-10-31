@@ -11,6 +11,7 @@ OBJECTS = \
 	aqueue.o \
 	lstack.o \
 	lqueue.o \
+	priority-queue.o \
 	slist.o \
 	sl_hashtable.o \
 	snode.o \
@@ -26,6 +27,7 @@ aqueue.o: aqueue.h
 lstack.o: lstack.h slist.h
 lqueue.o: lqueue.h slist.h
 main.o: $(HEADERS)
+priority-queue.o: priority-queue.h person.h
 slist.o: slist.h snode.h
 sl_hashtable.o: sl_hashtable.h snode.h
 snode.o: snode.h
