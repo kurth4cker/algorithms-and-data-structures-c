@@ -5,12 +5,14 @@
 
 #include <array.h>
 
-farray *
-farray_new(size_t size)
+array *
+array_new_with_objsize(size_t size, size_t objsize)
 {
-	farray *arr = malloc(sizeof(*arr) + sizeof(*arr->data) * size);
-	if (!arr)
+	const size_t datasize = size * objsize;
+	array *arr = malloc(sizeof(*arr) + datasize);
+	if (!arr) {
 		return NULL;
+	}
 	arr->size = size;
 	return arr;
 }
